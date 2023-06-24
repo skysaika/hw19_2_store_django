@@ -1,17 +1,16 @@
 from django.shortcuts import render
 
-# Create your views here.
-def index(request):
-    """Контроллер для отображения главной страницы """
-    return render(request, 'catalog/index.html')
+def home(request):
+    template = 'catalog/home.html'
+    return render(request, template, {})
 
+def about(request):
+    template = 'catalog/about.html'
+    return render(request, template, {})
 
 def contacts(request):
-    """Контроллер для отображения страницы contacts"""
+    template = 'catalog/contacts.html'
+    context = {}
     if request.method == 'POST':
-        # Обработка данных формы
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
-        print(f'{name} {phone}: {message}')
-    return render(request, 'catalog/contacts.html')
+        context.update(request.POST.dict())
+    return render(request, template, context)
